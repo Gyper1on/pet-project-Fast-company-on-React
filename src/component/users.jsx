@@ -3,6 +3,8 @@ import api from "../api";
 import Pagination from "./pagination";
 import {paginate} from "../utils/paginate";
 import GroupList from "./groupList";
+import UsersTable from "./usersTable";
+
 
 
 
@@ -49,7 +51,6 @@ const Users = () => {
         setSelectedProf()
     }
 
-
     return (
         <>
             <div style={{
@@ -85,46 +86,11 @@ const Users = () => {
 
             {count > 0 &&
 
-                <table className="table">
-
-                    <thead>
-                    <tr>
-                        <th scope="col">Имя</th>
-                        <th scope="col">Качества</th>
-                        <th scope="col">Профессия</th>
-                        <th scope="col">Встретился, раз</th>
-                        <th scope="col">Оценка</th>
-                        <th scope="col">Избранное</th>
-                        <th/>
-                    </tr>
-                    </thead>
-
-                    <tbody>
-
-                    {userCrop.map((user) => (
-                        <tr key={user._id}>
-                            <td>{user.name}</td>
-                            <td>{user.qualities.map((item => (
-                                <span key={item._id}
-                                      className={'badge m-1 bg-' + item.color}>{item.name}</span>)))}</td>
-                            <td>{user.profession.name}</td>
-                            <td>{user.completedMeetings}</td>
-                            <td>{user.rate}</td>
-                            <td>
-                                <button className={user.bookmark ? "bi bi-bookmark-star-fill" : "bi bi-bookmark-star"}
-                                        onClick={() => handleFavorite(user._id)}></button>
-                            </td>
-                            <td>
-                                <button className={'btn btn-danger'}
-                                        onClick={() => handleDelete(user._id)}> Попрощаться
-                                </button>
-                            </td>
-                        </tr>
-
-                    ))}
-
-                    </tbody>
-                </table>
+                <UsersTable
+                    onDelete = {handleDelete}
+                    onFavorite = {handleFavorite}
+                    userCrop={userCrop}
+                />
             }
             <div style={{ display: "flex", justifyContent: "center" }}>
                 <Pagination

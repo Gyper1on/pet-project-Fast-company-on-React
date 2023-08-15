@@ -1,3 +1,4 @@
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -11,3 +12,22 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.form-check-input:checked {
+  background-color: green !important;
+  border-color: green !important;
+}
+
+/*.nav-link.active {*/
+/*  background-color: #fdfdfd !important;*/
+/*  color: #0033ff !important;*/
+/*}*/
+
+/*.nav-link {*/
+/*  color: #000000 !important;*/
+/*  background-color: rgba(2, 49, 145, 0.87) !important;*/
+
+/*}*/
+
+

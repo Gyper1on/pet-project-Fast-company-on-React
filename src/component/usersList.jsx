@@ -4,16 +4,20 @@ import Pagination from "./pagination";
 import {paginate} from "../utils/paginate";
 import GroupList from "./groupList";
 import UsersTable from "./usersTable";
+import LoadingSpiner from "./loadingSpiner";
+import _ from 'lodash'
 
 
 
 
-const Users = () => {
+const UsersList = () => {
 
     const [users, setUsers] = useState(api.users.fetchAll())
     const [currentPage, setCurrentPage] = useState(1)
     const [professions, setProfessions] = useState()
     const [selectedProf, setSelectedProf] = useState()
+    const [sortBy, setSortBy] = useState({path: 'name', order: 'asc'})
+
 
     useEffect(() => {
         api.professions.fetchAll().then((data) => setProfessions(data))}, [])
@@ -22,8 +26,10 @@ const Users = () => {
 
     const pageSize = 4
     const filteredUsers = selectedProf? users.filter((user) => user.profession === selectedProf): users
-    const userCrop = paginate(filteredUsers, currentPage, pageSize)
     const count = filteredUsers.length
+    const sortedUsers = _.orderBy(filteredUsers, [sortBy.path], [sortBy.order])
+    const userCrop = paginate(sortedUsers, currentPage, pageSize)
+
 
     const handlePageChange = (pageIndex) => {
         setCurrentPage(pageIndex)
@@ -51,6 +57,10 @@ const Users = () => {
         setSelectedProf()
     }
 
+    const handleSort = (item) => {
+        setSortBy(item)
+    }
+
     return (
         <>
             <div style={{
@@ -59,7 +69,7 @@ const Users = () => {
                 marginTop: '20px',
                 marginBottom: '100px'
             }}>
-                {professions && (
+                {professions ?  (
                     <>
                     <GroupList
                         selectedItem ={selectedProf}
@@ -68,7 +78,7 @@ const Users = () => {
                     />
                         <button  className = 'btn btn-secondary m-2' onClick={clearFilter}>Очистить</button>
                     </>
-                )}
+                ) : <LoadingSpiner/>}
             </div>
 
         <span style={{
@@ -90,6 +100,9 @@ const Users = () => {
                     onDelete = {handleDelete}
                     onFavorite = {handleFavorite}
                     userCrop={userCrop}
+                    onSort={handleSort}
+                    selectedSort={sortBy}
+                    users ={users}
                 />
             }
             <div style={{ display: "flex", justifyContent: "center" }}>
@@ -104,4 +117,4 @@ const Users = () => {
     )
 };
 
-export default Users
+export default UsersList

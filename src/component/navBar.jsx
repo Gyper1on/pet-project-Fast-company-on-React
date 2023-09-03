@@ -9,13 +9,13 @@ const NavBar = () => {
             <div className="card-header">
                 <ul className="nav nav-tabs card-header-tabs">
                     <li className="nav-item">
-                        <NavLink exact className="nav-link" to="/">Main</NavLink>
+                        <NavLink exact className="nav-link" to="/">Главная</NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink className="nav-link" to="/login">Login</NavLink>
+                        <NavLink className="nav-link" to="/login">Войти</NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink className="nav-link" to="/users">Users</NavLink>
+                        <NavLink className="nav-link" to="/users">Все пользователи</NavLink>
                     </li>
                 </ul>
             </div>

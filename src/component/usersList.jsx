@@ -51,6 +51,7 @@ const UsersList = () => {
 
     const handleItemSelect = (item) => {
         setSelectedProf(item)
+        console.log(item)
     }
 
     const clearFilter = () => {

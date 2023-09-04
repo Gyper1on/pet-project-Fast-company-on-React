@@ -22,7 +22,7 @@ export function validator(data, config) {
             }
                 break
             case 'isMin':{
-             statusValidate = data.length < config.value // -------- ????????????????????????????????
+             statusValidate = data.length < config.value
             }
                 break
 

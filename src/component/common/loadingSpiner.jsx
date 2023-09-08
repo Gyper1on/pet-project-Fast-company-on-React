@@ -1,5 +1,5 @@
 import React from "react";
-import "../loaders.css"
+import "../../loaders.css"
 
 const LoadingSpiner = () => {
     return <>

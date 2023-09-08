@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import PropTypes from "prop-types";
-import '../Forms.css'
+import '../../../Forms.css'
 
 
 const TextField = ({label, type, value, onChange, name, error}) => {

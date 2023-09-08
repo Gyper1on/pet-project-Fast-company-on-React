@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import PropTypes from "prop-types";
-import getById from "../api/fake.api/user.api";
+import getById from "../../../api/fake.api/user.api";
 import {Navigate, useNavigate} from "react-router-dom";
 
 const UserPage = ({userId}) => {

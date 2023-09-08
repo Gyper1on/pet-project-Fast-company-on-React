@@ -1,20 +1,20 @@
 import React, {useState, useEffect} from "react";
-import api from "../api";
-import Pagination from "./pagination";
-import {paginate} from "../utils/paginate";
-import GroupList from "./groupList";
-import UsersTable from "./usersTable";
-import LoadingSpiner from "./loadingSpiner";
+import api from "../../../api";
+import Pagination from "../../common/pagination";
+import {paginate} from "../../../utils/paginate";
+import GroupList from "../../common/groupList";
+import UsersTable from "../../common/table/usersTable";
+import LoadingSpiner from "../../common/loadingSpiner";
 import _ from 'lodash'
 
-const UsersList = () => {
+const UsersListPage = () => {
 
     const [users, setUsers] = useState(api.users.fetchAll())
     const [currentPage, setCurrentPage] = useState(1)
     const [professions, setProfessions] = useState()
     const [selectedProf, setSelectedProf] = useState()
     const [sortBy, setSortBy] = useState({path: 'name', order: 'asc'})
-    const [serchQuery, setSeachQuery] = useState()
+    const [serchQuery, setSeachQuery] = useState('')
 
 
     useEffect(() => {
@@ -137,4 +137,4 @@ const UsersList = () => {
     )
 };
 
-export default UsersList
+export default UsersListPage

@@ -18,8 +18,6 @@ const UserTable = ({users,userCrop, onDelete, onFavorite, onSort, selectedSort})
 
     return <table className="table">
         <TableHeader {...{onSort, selectedSort, columns}}/>
-        {/*----------------------- ?????????????????*/}
-      
         <tbody>
         
         {userCrop.map((user) => (

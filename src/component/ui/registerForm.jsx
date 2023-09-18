@@ -2,21 +2,34 @@ import React, {useEffect, useState} from "react";
 import {validator} from "../../utils/validator";
 import TextField from "../common/form/textField";
 import api from "../../api";
+import SelectField from "../common/form/selectField";
+import RadioField from "../common/form/radioField";
+import Select from 'react-select';
+import MultiSelectField from "../common/form/multiSelectField";
+import loginForm from "./loginForm";
 
 const RegisterForm = () => {
 
-    const [data, setData] = useState({email: '', password: '', profession: ''})
+    const [data, setData] = useState({
+        email: '',
+        password: '',
+        profession: '',
+        sex: 'male',
+        qualities:[]
+    })
     const [professions, setProfessions] = useState()
+    const [qualities, setQualities] = useState({})
 
     useEffect(() => {
         api.professions.fetchAll().then((data) => setProfessions(data))
+        api.qualities.fetchAll().then((data) => setQualities(data))
     }, [])
 
     const [errors, setErrors] = useState({})
 
-    useEffect(() => {
-        validate()
-    }, [data])
+    const handleChange = (target) => {
+            setData((prevState) => ({...prevState, [target.name]: target.value}))
+    }
 
     const validatorConfig = {
         email: {
@@ -31,17 +44,21 @@ const RegisterForm = () => {
                 message: 'Password должен содержать 8 символов',
                 value: 8
             }
+        },
+        profession: {
+            isRequired: { message: 'Обязательно выберите вашу профессию'}
         }
     }
-    const validate = () => {
-        const errors = validator(data, validatorConfig)
-        setErrors(errors)
-        return Object.keys(errors).length === 0
-    }
 
-    const handleChange = ({target}) => {
-        setData((prevState) => ({...prevState, [target.name]: target.value}))
-    }
+    useEffect(() => {
+        validate();
+    }, [data]);
+
+    const validate = () => {
+        const errors = validator(data, validatorConfig);
+        setErrors(errors);
+        return Object.keys(errors).length === 0;
+    };
 
     const isValid = Object.keys(errors).length === 0
 
@@ -67,28 +84,31 @@ const RegisterForm = () => {
                        type='password'
                        error={errors.password}/>
 
+            <SelectField
+                label="Выберите свою профессию"
+                defaultOption="Выбрать..."
+                options={professions}
+                name="profession"
+                onChange={handleChange}
+                value={data.profession}
+                error={errors.profession}
+            />
 
-            <div className='mb-4'>
-                <div className="col-md-3">
-                    <label htmlFor="validationCustom04" className="form-label">State</label>
-                    <select className="form-select" id="validationCustom04" required>
-                        <option selected disabled value="">Choose...</option>
+            <RadioField
+                options={[{name: 'Мужской', value: 'male'},
+                {name: 'Женский', value: 'female'}]}
+                onChange={handleChange}
+                label='Выберите свой пол'
+                value={data.sex}
+                name='sex'/>
 
-                        {professions.map(profession =>
-                            <option
-                                selected={profession._id === data.profession}
-                                    value={profession._id}>{profession.name}
-                            </option>)}
+            <MultiSelectField
+            options={qualities}
+            onChange={handleChange}
+            name='qualities'
+            label='Выбурите ваши качества'
+            />
 
-                        <option value='_id'>...</option>
-                    </select>
-                    <div className="invalid-feedback">
-                        Please select a valid state.
-                    </div>
-                </div>
-            </div>
-
-            {/*{ Object.keys(errors).length === 0? <button type='submit'>Submit</button> : null }*/}
             <button type='submit' className="btn btn-primary w-100 mx-auto" disabled={!isValid}>Войти
             </button>
         </form>

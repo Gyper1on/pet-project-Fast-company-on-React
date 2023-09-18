@@ -12,7 +12,7 @@ const NavBar = () => {
                         <NavLink exact className="nav-link" to="/">Главная</NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink className="nav-link" to="/login">Войти</NavLink>
+                        <NavLink className="nav-link" to="/login">Вход / Регистрация</NavLink>
                     </li>
                     <li className="nav-item">
                         <NavLink className="nav-link" to="/users">Все пользователи</NavLink>

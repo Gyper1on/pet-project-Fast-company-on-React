@@ -4,9 +4,9 @@ import TextField from "../common/form/textField";
 import api from "../../api";
 import SelectField from "../common/form/selectField";
 import RadioField from "../common/form/radioField";
-import Select from 'react-select';
 import MultiSelectField from "../common/form/multiSelectField";
-import loginForm from "./loginForm";
+import CheckBoxField from "../common/form/checkBoxField";
+
 
 const RegisterForm = () => {
 
@@ -15,17 +15,25 @@ const RegisterForm = () => {
         password: '',
         profession: '',
         sex: 'male',
-        qualities:[]
+        qualities:[],
+        licence:false
     })
+
     const [professions, setProfessions] = useState()
-    const [qualities, setQualities] = useState({})
+    const [qualities, setQualities] = useState([])
+    const [errors, setErrors] = useState({})
 
     useEffect(() => {
         api.professions.fetchAll().then((data) => setProfessions(data))
-        api.qualities.fetchAll().then((data) => setQualities(data))
+        api.qualities.fetchAll().then((data) => {
+            const qualitiesList = Object.keys(data).map((optionName) => ({
+                value: data[optionName]._id,
+                label: data[optionName].name,
+                color: data[optionName].color
+            }));
+            setQualities(qualitiesList);
+        });
     }, [])
-
-    const [errors, setErrors] = useState({})
 
     const handleChange = (target) => {
             setData((prevState) => ({...prevState, [target.name]: target.value}))
@@ -47,6 +55,11 @@ const RegisterForm = () => {
         },
         profession: {
             isRequired: { message: 'Обязательно выберите вашу профессию'}
+        },
+        licence:{
+            isRequired:{
+                message: 'Вы не можете использовать наш сервис без подтверждения лицензионного соглашения'
+            }
         }
     }
 
@@ -106,8 +119,15 @@ const RegisterForm = () => {
             options={qualities}
             onChange={handleChange}
             name='qualities'
-            label='Выбурите ваши качества'
+            label='Выберите ваши качества'
             />
+
+            <CheckBoxField
+                name='licence'
+                onChange={handleChange}
+                value={data.licence}
+                error={errors.licence}
+            > Подтвердить <a className='license-link' role={"button"}>лицензионное соглашение</a> </CheckBoxField>
 
             <button type='submit' className="btn btn-primary w-100 mx-auto" disabled={!isValid}>Войти
             </button>

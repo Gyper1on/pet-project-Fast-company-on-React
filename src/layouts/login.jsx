@@ -20,12 +20,12 @@ const Login = () => {
                         <>
                             <h3 className="mb-4">Регистрация</h3>
                             <RegisterForm/>
-                            <p>Уже есть аккаунт? <a role="button" onClick={toggleFormType}>Вход</a></p>
+                            <p>Уже есть аккаунт? <a role="button" className="login-link" onClick={toggleFormType}>Вход</a></p>
                     </>:
                         <>
                             <h3 className="mb-4">Вход</h3>
                         <LoginForm/>
-                            <p>Нет аккаунта? <a role="button" onClick={toggleFormType}>Зарегистрироваться</a></p>
+                            <p>Нет аккаунта? <a role="button" className="register-link" onClick={toggleFormType}>Зарегистрироваться</a></p>
                         </>}
                 </div>
             </div>

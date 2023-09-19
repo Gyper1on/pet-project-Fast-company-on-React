@@ -19,6 +19,22 @@ code {
   border-color: green !important;
 }
 
+.register-link {
+  color: blue;
+  text-decoration: none;
+}
+
+.login-link {
+  color: blue;
+  text-decoration: none;
+}
+
+.license-link {
+  color: blue;
+  text-decoration: none;
+}
+
+
 /*.nav-link.active {*/
 /*  background-color: #fdfdfd !important;*/
 /*  color: #0033ff !important;*/

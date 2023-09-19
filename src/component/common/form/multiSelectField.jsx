@@ -23,7 +23,8 @@ const MultiSelectField = ({options, onChange, name, label}) => {
                 classNamePrefix="select"
                 onChange={handleChange}
                 name={name}
-                closeMenuOnSelect={false}/>
+                closeMenuOnSelect={false}
+                placeholder="Выбрать..."/>
         </div>
 </>
     )

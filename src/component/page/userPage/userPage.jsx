@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react";
 import PropTypes from "prop-types";
 import getById from "../../../api/fake.api/user.api";
-import {Navigate, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 const UserPage = ({userId}) => {
     const [user, setUser] = useState();
@@ -12,9 +12,9 @@ const UserPage = ({userId}) => {
 
     const navigate = useNavigate()
 
-   const handleClick = () => {
- navigate('/users')
-   }
+    const handleClick = () => {
+        navigate(`/users/${userId}/edit`)
+    }
 
     if (user) {
         return (
@@ -27,7 +27,7 @@ const UserPage = ({userId}) => {
                     <span key={item._id}
                           className={'badge m-1 bg-' + item.color } style={{ fontSize: "1.2rem" }}>{item.name}</span>
                 ))}
-               <div><button onClick={handleClick}>Все пользователи</button></div>
+                <div><button onClick={handleClick}>Изменить</button></div>
             </div>
         );
     } else {

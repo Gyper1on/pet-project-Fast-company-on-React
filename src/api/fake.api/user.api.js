@@ -122,19 +122,30 @@ const users = [
     },
 ]
 
-
+if (!localStorage.getItem("users")) {
+    localStorage.setItem("users", JSON.stringify(users));
+}
 const getById = (id) =>
     new Promise((resolve) => {
         window.setTimeout(function () {
-            resolve(users.find((user) => user._id === id));
+            resolve(JSON.parse(localStorage.getItem("users")) .find((user) => user._id === id));
         }, 1000);
     });
 export default getById
 
-
-
 export function fetchAll() {
     return users
 }
+export const update = (id, data) =>
+    new Promise((resolve) => {
+        const users = JSON.parse(localStorage.getItem("users"));
+        console.log('users' + users)
+        const userIndex = users.findIndex((u) => u._id === id);
+        users[userIndex] = { ...users[userIndex], ...data };
+        localStorage.setItem("users", JSON.stringify(users));
+        resolve(users[userIndex]);
+    });
+
+
 
 

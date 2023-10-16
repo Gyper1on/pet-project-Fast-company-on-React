@@ -13,7 +13,7 @@ const UserCard = ({ user,userId }) => {
                     className="position-absolute top-0 end-0 btn btn-light btn-sm"
                     onClick={handleClick}
                 >
-                    <i className="bi bi-gear"></i>
+                    <i className="bi bi-gear fs-3"></i>
                 </button>
                 <div className="d-flex flex-column align-items-center text-center position-relative">
                     <img

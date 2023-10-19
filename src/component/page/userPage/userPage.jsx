@@ -6,15 +6,13 @@ import QualitiesCard from "../../ui/qualitiesCard";
 import MeetingsCard from "../../ui/meetingsCard";
 import Comments from "../../ui/comments";
 
-
 const UserPage = ({userId}) => {
-    const [user, setUser] = useState();
 
+    const [user, setUser] = useState();
 
     useEffect(() => {
         getById(userId).then((data) => setUser(data));
     }, []);
-
 
     if (user) {
         return (

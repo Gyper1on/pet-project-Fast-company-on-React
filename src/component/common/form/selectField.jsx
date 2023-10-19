@@ -12,8 +12,13 @@ const SelectField = ({value,label, onChange, defaultOption, options, error, name
         return 'form-select' + (error ? ' is-invalid' : '')
     }
 
-  let optionsArray = !Array.isArray(options) && typeof(options) === 'object'  ?
-        Object.keys(options).map(optionName => ({name: options[optionName].name, value: options[optionName].value})): options
+
+    const optionsArray =
+        !Array.isArray(options) && typeof options === "object"
+            ? Object.values(options)
+            : options
+  // let optionsArray = !Array.isArray(options) && typeof(options) === 'object'  ?
+  //       Object.keys(options).map(optionName => ({name: options[optionName].name, value: options[optionName].value})): options
 
     return (
         <div className='mb-4'>

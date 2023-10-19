@@ -4,12 +4,20 @@ import SelectField from "../form/selectField";
 import TextAreaField from "../form/textAreaField";
 import { validator } from "../../../utils/validator";
 import PropTypes from "prop-types";
+import loginForm from "../../ui/loginForm";
 const initialData = { userId: "", content: "" };
 
 const AddCommentForm = ({ onSubmit }) => {
     const [data, setData] = useState(initialData);
-    const [users, setUsers] = useState(api.users.fetchAll());
+    const [users] = useState(api.users.fetchAll());
     const [errors, setErrors] = useState({});
+
+
+    // useEffect(() => {
+    //     api.users.fetchAll().then(setUsers);
+    // }, []);
+
+
     const handleChange = (target) => {
         setData((prevState) => ({
             ...prevState,
@@ -35,9 +43,7 @@ const AddCommentForm = ({ onSubmit }) => {
         return Object.keys(errors).length === 0;
     };
 
-    // useEffect(() => {
-    //     api.users.fetchAll().then(setUsers);
-    // }, []);
+
 
     const clearForm = () => {
         setData(initialData);
@@ -50,13 +56,19 @@ const AddCommentForm = ({ onSubmit }) => {
         onSubmit(data);
         clearForm();
     };
+
+
     const arrayOfUsers =
         users &&
         Object.keys(users).map((userId) => ({
             label: users[userId].name,
             value: users[userId]._id
         }));
+
+
+
     return (
+
         <div>
             <h2>Написать комментарий</h2>
             <form onSubmit={handleSubmit}>

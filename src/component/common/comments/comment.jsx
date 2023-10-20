@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import PropTypes from "prop-types";
 import {displayDate} from "../../../utils/displayDate";
-import api from "../../../api";
 import getById from "../../../api/fake.api/user.api";
 
 const Comment = ({content, created_at: created, _id: id, userId, onRemove}) => {
@@ -26,13 +25,11 @@ const Comment = ({content, created_at: created, _id: id, userId, onRemove}) => {
                     <div className="col">
                         <div className="d-flex flex-start ">
                             <img
-
-                                src = {"https://api.dicebear.com/7.x/big-ears/svg?seed=Ginger"}
-                                // src={`https://avatars.dicebear.com/api/avataaars/${(
-                                //     Math.random() + 1
-                                // )
-                                //     .toString(36)
-                                //     .substring(7)}.svg`}
+                                src = {`https://robohash.org/${(
+                                    Math.random() + 1
+                                )
+                                    .toString(36)
+                                    .substring(7)}.png`}
                                 className="rounded-circle shadow-1-strong me-3"
                                 alt="avatar"
                                 width="65"

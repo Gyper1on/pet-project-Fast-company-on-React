@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const UserCard = ({ user,userId }) => {
     const navigate = useNavigate()
     const handleClick = () => {
-        navigate(`/user/${userId}/edit`)
+        navigate(`/users/${userId}/edit`)
     };
     return (
         <div className="card mb-3">
@@ -17,13 +17,10 @@ const UserCard = ({ user,userId }) => {
                 </button>
                 <div className="d-flex flex-column align-items-center text-center position-relative">
                     <img
-                        src={"https://api.dicebear.com/7.x/big-ears/svg"}
-
-                        // src={`https://avatars.dicebear.com/api/avataaars/${(
-                        //     Math.random() + 1
-                        // )
-                        //     .toString(36)
-                        //     .substring(7)}.svg`}
+                        src={`https://robohash.org/${
+                            (Math.random() + 1)
+                            .toString(36)
+                            .substring(7)}.png`}
                         className="rounded-circle"
                         width="150"
                     />

@@ -8,13 +8,14 @@ const initialData = { userId: "", content: "" };
 
 const AddCommentForm = ({ onSubmit }) => {
     const [data, setData] = useState(initialData);
-    const [users] = useState(api.users.fetchAll());
+    const [users, setUsers] = useState();
     const [errors, setErrors] = useState({});
 
 
-    // useEffect(() => {
-    //     api.users.fetchAll().then(setUsers);
-    // }, []);
+    useEffect(() => {
+        const users =  api.users.fetchAll();
+       setUsers(users);
+    }, []);
 
 
     const handleChange = (target) => {
@@ -63,7 +64,6 @@ const AddCommentForm = ({ onSubmit }) => {
             label: users[userId].name,
             value: users[userId]._id
         }));
-
 
 
     return (

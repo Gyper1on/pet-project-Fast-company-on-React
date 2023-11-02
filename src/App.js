@@ -6,7 +6,6 @@ import Login from "./layouts/login";
 import NavBar from "./component/ui/navBar";
 import NotFound from "./component/common/notFound";
 
-
 function App() {
 
     return (
